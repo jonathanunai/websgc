@@ -12,27 +12,17 @@ export const availableLocales: ILocales = {
   en: {
     name: 'English',
     iso: 'en',
-    flag: '🇺🇸',
+    flag: '🇬🇧',
   },
-  id: {
-    name: 'Bahasa',
-    iso: 'id',
-    flag: '🇮🇩',
+  es: {
+    name: 'Español',
+    iso: 'es',
+    flag: '🇪🇸',
   },
-  ja: {
-    name: '日本語',
-    iso: 'ja',
-    flag: '🇯🇵',
-  },
-  ko: {
-    name: '한국어',
-    iso: 'ko',
-    flag: '🇰🇷',
-  },
-  zh: {
-    name: '简体中文',
-    iso: 'zh',
-    flag: '🇨🇳',
+  sv: {
+    name: 'Svenska',
+    iso: 'sv',
+    flag: '🇸🇪',
   },
 }
 

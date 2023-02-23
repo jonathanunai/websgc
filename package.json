@@ -1,12 +1,12 @@
 {
-  "name": "nuxt3-awesome-starter",
+  "name": "sgc",
   "version": "0.1.0",
-  "description": "a Nuxt 3 starter template or boilerplate with a lot of useful features. Nuxt3 + Tailwindcss 3",
+  "description": "Web SGG - Sociedad Gastronómica y Cultural",
   "repository": {
     "type": "git",
-    "url": "git://github.com/viandwi24/nuxt3-awesome-starter"
+    "url": "git://github.com/jonathanunai/websgc"
   },
-  "author": "viandwi24",
+  "author": "jonathanunai",
   "license": "MIT",
   "scripts": {
     "build": "nuxt build",

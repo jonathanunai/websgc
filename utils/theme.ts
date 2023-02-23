@@ -1,4 +1,4 @@
-export type IThemeSettingOptions = 'dark' | 'light' | 'system' | 'realtime'
+export type IThemeSettingOptions = 'dark' | 'light' | 'system'
 
 export type ITheme = 'dark' | 'light'
 
@@ -9,7 +9,6 @@ export const availableThemes: {
   { key: 'light', text: 'Light' },
   { key: 'dark', text: 'Dark' },
   { key: 'system', text: 'System' },
-  { key: 'realtime', text: 'Realtime' },
 ]
 
 export function ThemeManager() {
@@ -30,12 +29,6 @@ export function ThemeManager() {
       return 'dark'
     }
   }
-  const getRealtimeTheme = (): ITheme => {
-    const now = new Date()
-    const hour = now.getHours()
-    const isNight = hour >= 17 || hour <= 5
-    return isNight ? 'dark' : 'light'
-  }
 
   // state
   const themeSetting = useState<IThemeSettingOptions>('theme.setting', () =>
@@ -48,9 +41,7 @@ export function ThemeManager() {
   // wathcers
   const onThemeSettingChange = (themeSetting: IThemeSettingOptions) => {
     themeUserSetting.value = themeSetting
-    if (themeSetting === 'realtime') {
-      themeCurrent.value = getRealtimeTheme()
-    } else if (themeSetting === 'system') {
+    if (themeSetting === 'system') {
       themeCurrent.value = getSystemTheme()
     } else {
       themeCurrent.value = themeSetting
@@ -60,11 +51,6 @@ export function ThemeManager() {
   const onThemeSystemChange = () => {
     if (themeSetting.value === 'system') {
       themeCurrent.value = getSystemTheme()
-    }
-  }
-  const onRealtimeCheck = () => {
-    if (themeSetting.value === 'realtime') {
-      themeCurrent.value = getRealtimeTheme()
     }
   }
 
@@ -81,13 +67,11 @@ export function ThemeManager() {
     window
       .matchMedia('(prefers-color-scheme: dark)')
       .addEventListener('change', onThemeSystemChange)
-    intervalCheckTime = setInterval(onRealtimeCheck, 1000)
   })
   onBeforeUnmount(() => {
     window
       .matchMedia('(prefers-color-scheme: dark)')
       .removeEventListener('change', onThemeSystemChange)
-    if (intervalCheckTime) clearInterval(intervalCheckTime)
   })
 
   return {
@@ -96,6 +80,5 @@ export function ThemeManager() {
 
     getUserSetting,
     getSystemTheme,
-    getRealtimeTheme,
   }
 }

@@ -1,7 +1,7 @@
 export default defineAppConfig({
-  name: 'Nuxt 3 Awesome Starter',
+  name: 'Web SGG - Sociedad Gastronómica y Cultural',
   author: {
-    name: 'viandwi24',
-    link: 'https://github.com/viandwi24',
+    name: 'jonathanunai',
+    link: 'https://github.com/jonathanunai',
   },
 })

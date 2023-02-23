@@ -6,28 +6,17 @@ components:
     change_theme: change theme
 pages:
   index:
-    title: nuxt 3[]awesome[]starter
+    title: The cultural[]and gastronomic[]society
   404:
     title: page not found
-  blank:
-    nav: blank
-    title: blank page
-    description: this is a blank page
-    just_blank_page_with_title: just blank page with title
   post:
     nav: post
     title: post
     description: this is a post page
-  test:
-    nav: test
-    title: testing
-    description: this is a test page
-    counter: counter
-    increment: increment
-    decrement: decrement
-    reset: reset
-    identity: identity
-    full_name: fullName
+  editions:
+    nav: editions
+    title: editions
+    description: all the past events the cousins have enjoyed
   getting-started:
     nav: getting started
     title: getting started
