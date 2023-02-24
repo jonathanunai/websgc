@@ -60,6 +60,9 @@ export default defineNuxtConfig({
     // global transition
     pageTransition: { name: 'page', mode: 'out-in' },
     layoutTransition: { name: 'layout', mode: 'out-in' },
+    head: {
+      link: [{ rel: 'icon', type: 'image/png', href: '/logo_mini.png' }],
+    },
   },
 
   // localization - i18n config
@@ -68,7 +71,7 @@ export default defineNuxtConfig({
     vueI18n: {
       locale: 'en',
       fallbackLocale: 'en',
-      availableLocales: ['en', 'id', 'ja', 'ko'],
+      availableLocales: ['en', 'es', 'sv'],
     },
   },
 

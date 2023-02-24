@@ -9,13 +9,13 @@ pages:
     title: The cultural[]and gastronomic[]society
   404:
     title: page not found
-  post:
-    nav: post
-    title: post
-    description: this is a post page
   editions:
     nav: editions
     title: editions
+    description: all the past events the cousins have enjoyed
+  events:
+    nav: events
+    title: events
     description: all the past events the cousins have enjoyed
   getting-started:
     nav: getting started
@@ -53,7 +53,7 @@ pages:
       nav: home
       title: home
 banners:
-  welcome: hello, welcome to %{app_name}!
+  welcome: Next cousenhood will be in Pamplona 2023!
 others:
   learn_more: learn more
   copy: copy

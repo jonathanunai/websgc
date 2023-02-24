@@ -72,7 +72,7 @@ const copyBash = () => {
               }; --end-color: ${item.endColor}; --animation-name: anim-fg-${
                 i + 1
               }`"
-              class="animated-text-bg drop-shadow-xl text-5xl xl:text-8xl 2xl:text-9xl block font-black uppercase"
+              class="animated-text-bg drop-shadow-xl text-2xl xl:text-5xl 2xl:text-9xl block font-black uppercase"
             >
               <span class="animated-text-fg">{{ item.text }}</span>
             </span>
@@ -82,16 +82,16 @@ const copyBash = () => {
           >
             <Button
               size="lg"
-              text="Nuxt 3"
+              text="Eventos"
               class="font-extrabold"
-              href="https://v3.nuxtjs.org"
+              to="/events"
             />
             <Button
               size="lg"
-              text="Github"
+              text="Contacto"
               type="secondary"
               class="font-extrabold"
-              href="https://github.com/viandwi24/nuxt3-awesome-starter"
+              href="/contact"
             />
           </div>
         </div>

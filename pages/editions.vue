@@ -17,11 +17,9 @@ useHead(() => ({
     },
   ],
 }))
-const {
-  data: ediciones,
-  pending,
-  error,
-} = await useFetch<[Edition]>('https://lasgc.com/primoapi/ediciones')
+const { data: ediciones } = await useFetch<[Edition]>(
+  'https://lasgc.com/primoapi/ediciones'
+)
 </script>
 
 <template>

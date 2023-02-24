@@ -57,7 +57,7 @@ const toggleOptions = (show?: boolean) => {
       <slot name="banner" />
     </div>
     <div class="max-w-8xl w-full mx-auto">
-      <div class="py-3 lg:px-8 mx-4 lg:mx-0">
+      <div class="py-3 px-2 lg:px-8 lg:mx-0">
         <div class="relative flex items-center">
           <!-- drawer:toggle -->
           <div
@@ -82,15 +82,12 @@ const toggleOptions = (show?: boolean) => {
           <slot name="title">
             <NuxtLink
               tag="a"
-              class="mr-3 flex-none overflow-hidden md:w-auto text-md font-bold text-gray-900 dark:text-gray-200"
+              class="mr-3 flex-none overflow-hidden md:w-auto text-sm md:text-md font-bold text-gray-900 dark:text-gray-200"
               :to="{ name: 'index' }"
             >
               <span class="sr-only">home</span>
               <span class="flex items-center">
-                <IconSimpleIcons:nuxtdotjs
-                  class="inline-block mr-2 text-lg text-primary-500"
-                />
-                {{ app.name }}
+                <img src="/logo_mini.png" class="w-8" />{{ app.name }}
               </span>
             </NuxtLink>
           </slot>
@@ -99,7 +96,7 @@ const toggleOptions = (show?: boolean) => {
           <!-- options:toggle -->
           <div
             v-if="$slots['options']"
-            class="flex-1 flex justify-end lg:hidden"
+            class="flex justify-end ml-auto lg:hidden"
           >
             <button
               class="flex items-center focus:outline-none"
