@@ -5,6 +5,9 @@ const props = defineProps({
     default: 10,
   },
 })
+const color = computed((): String => {
+  return props.perc < 74 ? 'stroke-red-500' : 'stroke-lime-600'
+})
 
 const strokeDash = `${props.perc}, 100`
 </script>
@@ -22,7 +25,7 @@ const strokeDash = `${props.perc}, 100`
           a 15.9155 15.9155 0 0 1 0 -31.831"
       />
       <path
-        class="circle fill-none stroke-lime-900 stroke-width-3 stroke-lin"
+        :class="`circle fill-none ${color} stroke-width-3`"
         :stroke-dasharray="strokeDash"
         d="M18 2.0845
           a 15.9155 15.9155 0 0 1 0 31.831
