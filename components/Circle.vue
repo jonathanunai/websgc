@@ -19,7 +19,7 @@ const strokeDash = `${props.perc}, 100`
       class="circular-chart block mx-auto my-1 max-w-80 max-h-250px"
     >
       <path
-        class="circle-bg fill-none stroke-light-300 stroke-width-4"
+        class="circle-bg fill-none stroke-dark-50 stroke-width-4"
         d="M18 2.0845
           a 15.9155 15.9155 0 0 1 0 31.831
           a 15.9155 15.9155 0 0 1 0 -31.831"
@@ -31,7 +31,9 @@ const strokeDash = `${props.perc}, 100`
           a 15.9155 15.9155 0 0 1 0 31.831
           a 15.9155 15.9155 0 0 1 0 -31.831"
       />
-      <text x="18" y="20.35" class="percentage">{{ perc }}%</text>
+      <text x="18" y="20.35" class="percentage fill-light-900">
+        {{ perc }}%
+      </text>
     </svg>
   </div>
 </template>
@@ -52,7 +54,6 @@ const strokeDash = `${props.perc}, 100`
 }
 
 .percentage {
-  fill: #666;
   font-family: sans-serif;
   font-size: 0.5em;
   text-anchor: middle;

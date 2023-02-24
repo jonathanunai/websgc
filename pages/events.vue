@@ -10,6 +10,8 @@ import { capitalize } from '~/utils/str'
 import { formatDate, percentage } from '~/utils/sgc'
 
 import { Size } from '~/composables/useScreen'
+import Overlay from '~~/components/ActionSheet/Overlay.vue'
+import { ActionSheet, ActionSheetOverlay } from '~~/.nuxt/components'
 
 // composable
 const { t } = useLang()
@@ -45,6 +47,7 @@ const id = ref(randomToken())
 const enableSpamProtection = ref(false)
 const enableDirList = ref(false)
 const enableAdvancedSetting = ref(false)
+const showPoints = ref(false)
 
 // methods
 const validate = async () => {
@@ -117,53 +120,91 @@ const { data: ediciones } = await useFetch<[Edition]>(
                 <CardContent>
                   <p
                     v-if="edicion.descripcion"
-                    class="mb-2"
+                    class="mb-2 px-6"
                     v-html="edicion.descripcion"
                   ></p>
-                  <p v-else>
+                  <p v-else class="mb-2 px-6">
                     En {{ formatDate(edicion.fecha) }} visitamos
                     {{ edicion.nombre }} y tuvimos el placer de comer en el
                     restaurante {{ edicion.restaurante }}, disfrutar de una
                     actividad como {{ edicion.actividad }}, todo ello organizado
                     por {{ edicion.organizador }}.
                   </p>
-                  <div class="flex flex-row flex-wrap">
-                    <div class="main-points flex flex-col flex-1-2">
-                      <Circle
-                        :perc="percentage(edicion.puntuacion_total)"
-                      ></Circle>
-                      <p class="text-center">Valoración total</p>
+                  <div class="bg-dark-300 p-4 my-2 text-light-900 rounded-xl">
+                    <h3 class="text-center text-xl">Los puntos</h3>
+                    <div class="flex flex-row flex-wrap">
+                      <CircleWrapper
+                        :points="percentage(edicion.puntuacion_total)"
+                        text="Valoración total"
+                      />
+                      <CircleWrapper
+                        :points="percentage(edicion.puntuacion_restaurante)"
+                        text="Restaurante"
+                      />
+                      <CircleWrapper
+                        :points="percentage(edicion.puntos_ambiente_nocturno)"
+                        text="Ambiente nocturno"
+                      />
+                      <CircleWrapper
+                        :points="percentage(edicion.puntos_actividad)"
+                        text="Actividad cultural"
+                      />
                     </div>
-                    <div class="main-points flex flex-col">
-                      <Circle
-                        :perc="percentage(edicion.puntuacion_restaurante)"
-                      ></Circle>
-                      <p class="text-center">Restaurante</p>
-                    </div>
-                    <div class="main-points flex flex-col">
-                      <Circle
-                        :perc="percentage(edicion.puntos_actividad)"
-                      ></Circle>
-                      <p class="text-center">Actividad cultural</p>
-                    </div>
-                    <div class="main-points flex flex-col">
-                      <Circle
-                        :perc="percentage(edicion.puntos_ambiente_nocturno)"
-                      ></Circle>
-                      <p class="text-center">Ambiente nocturno</p>
-                    </div>
-                  </div>
-                  <div class="flex flex-row flex-nowrap">
-                    <Circle :perc="percentage(edicion.puntos_calidad)"></Circle>
-                    <Circle :perc="percentage(edicion.puntos_local)"></Circle>
-                    <Circle
-                      :perc="percentage(edicion.puntos_organizacion)"
-                    ></Circle>
-                    <Circle :perc="percentage(edicion.puntos_precio)"></Circle>
-                    <Circle :perc="percentage(edicion.puntos_vino)"></Circle>
-                    <Circle
-                      :perc="percentage(edicion.puntos_servicio)"
-                    ></Circle>
+                    <Button
+                      size="md"
+                      text="Ver todos"
+                      class="font-extrabold"
+                      @click="showPoints = true"
+                    />
+                    <FullOverlay v-if="showPoints" @click="showPoints = false">
+                      <h3 class="text-xl text-light-900 text-center font-bold">
+                        Restaurante {{ edicion.restaurante }}
+                      </h3>
+                      <div class="flex flex-row flex-wrap">
+                        <CircleWrapper
+                          :points="percentage(edicion.puntos_calidad)"
+                          text="Calidad de la comida"
+                        />
+                        <CircleWrapper
+                          :points="percentage(edicion.puntos_precio)"
+                          text="Calidaad / Precio"
+                        />
+                        <CircleWrapper
+                          :points="percentage(edicion.puntos_local)"
+                          text="Ambiente del local"
+                        />
+                        <CircleWrapper
+                          :points="percentage(edicion.puntos_servicio)"
+                          text="Amabilidad del personal"
+                        />
+                        <CircleWrapper
+                          :points="percentage(edicion.puntos_vino)"
+                          text="Los vinos"
+                        />
+                        <CircleWrapper
+                          :points="percentage(edicion.puntuacion_restaurante)"
+                          text="Total"
+                        />
+                      </div>
+                      <h3 class="text-xl text-light-900 text-center font-bold">
+                        La noche, actividad cultural y organización
+                      </h3>
+                      <div class="flex flex-row flex-wrap">
+                        <CircleWrapper
+                          :points="percentage(edicion.puntos_ambiente_nocturno)"
+                          :text="`La noche de ${edicion.nombre}`"
+                        />
+                        <CircleWrapper
+                          v-if="edicion.actividad"
+                          :points="percentage(edicion.puntos_actividad)"
+                          :text="edicion.actividad"
+                        />
+                        <CircleWrapper
+                          :points="percentage(edicion.puntos_organizacion)"
+                          :text="`Organización de ${edicion.organizador}`"
+                        />
+                      </div>
+                    </FullOverlay>
                   </div>
                 </CardContent>
               </Card>
@@ -176,7 +217,6 @@ const { data: ediciones } = await useFetch<[Edition]>(
 </template>
 <style>
 .main-points {
-  width: 50%;
 }
 .main-points > * {
 }

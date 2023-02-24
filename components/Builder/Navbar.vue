@@ -87,7 +87,7 @@ const toggleOptions = (show?: boolean) => {
             >
               <span class="sr-only">home</span>
               <span class="flex items-center">
-                <img src="/logo_mini.png" class="w-8" />{{ app.name }}
+                <img src="/logo_mini.png" class="w-8 pr-2" />{{ app.name }}
               </span>
             </NuxtLink>
           </slot>

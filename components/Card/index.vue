@@ -36,7 +36,7 @@ defineProps({
   background-position: center;
   background-size: cover;
   width: 100%;
-  padding-top: 50%;
+  padding-top: 30%;
   h2 {
   }
 }
