@@ -8,58 +8,21 @@ pages:
   '404':
     title: página no encontrada
   index:
-    title: la sociedad cultural[]y gastronómica[]
-  post:
-    nav: correo
-    title: correo
-    description: esta es una pagina de publicaciones
+    title: la sociedad[]gastronómica[]y cultural
   editions:
     nav: ediciones
     title: ediciones
     description: todos los eventos pasados ​​que los primos han disfrutado
-  getting-started:
-    nav: empezando
-    title: empezando
-    description: esta es una página de inicio
-  setting:
-    nav: configuración
-    title: configuración
-    description: esta es una página de configuración
-    sections:
-      validate_username:
-        title: validar perfil de github
-        description: >-
-          escriba su nombre de usuario de github y haga clic en el botón para
-          validar.
-        footer: aprender más acerca de
-        footer_button: validar
-        footer_link: api de usuarios de github
-      bot_id:
-        title: identificación del bot
-        description: esta es su id de bot.
-        footer: se utiliza al interactuar con el bot.
-      protection_spam:
-        title: protección contra el spam
-        description: alternar habilitar para eliminar el borde rojo
-        footer: si está habilitado, protegeremos sus comentarios del spam
-      advanced_enable_advanced:
-        title: habilitar la configuración avanzada
-        description: >-
-          puede habilitar la configuración avanzada para cambiar la
-          configuración
-      advanced_dir_listing:
-        title: lista de directorios
-        description: >-
-          si no hay ningún archivo de índice dentro de un directorio, se
-          mostrará el contenido del directorio.
-  dashboard:
-    nav: panel
-    title: panel
-    index:
-      nav: hogar
-      title: hogar
+  events:
+    nav: eventos
+    title: eventos
+    description: todos los eventos pasados ​​que los primos han disfrutado
+  restaurants:
+    nav: restaurantes
+    title: los restaurantes
+    description: todos los restaurantes que han disfrutado los primos
 banners:
-  welcome: ¡hola, bienvenido a %{app_name}!
+  welcome: ¡la próxima colegiatura será en pamplona 2023!
 others:
   learn_more: aprende más
   copy: copiar

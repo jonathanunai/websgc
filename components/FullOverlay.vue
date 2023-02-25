@@ -1,8 +1,8 @@
 <template>
   <div
-    class="fixed bg-dark-500 opacity-90 z-50 top-0 left-0 w-screen h-screen flex flex-col items-center justify-center overflow-scroll overscroll-none scrollbar-hide"
+    class="block fixed bg-dark-500 z-50 top-0 left-0 w-screen h-screen overflow-scroll overscroll-none scrollbar-hide"
   >
-    <div class="p-6">
+    <div class="p-6 flex flex-col items-center justify-center">
       <slot />
     </div>
   </div>

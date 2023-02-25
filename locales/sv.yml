@@ -9,53 +9,20 @@ pages:
     title: sidan hittas inte
   index:
     title: det kulturella[]och gastronomiska[]samhället
-  post:
-    nav: posta
-    title: posta
-    description: detta är en inläggssida
   editions:
     nav: upplagor
     title: upplagor
     description: alla tidigare händelser som kusinerna har haft
-  getting-started:
-    nav: komma igång
-    title: komma igång
-    description: det här är en startsida
-  setting:
-    nav: miljö
-    title: miljö
-    description: detta är en inställningssida
-    sections:
-      validate_username:
-        title: validera github-profilen
-        description: skriv ditt github-användarnamn och klicka på knappen för att validera.
-        footer: lära sig mer om
-        footer_button: bekräfta
-        footer_link: github användare api
-      bot_id:
-        title: bot-id
-        description: detta är ditt bot-id.
-        footer: används när du interagerar med boten.
-      protection_spam:
-        title: spamskydd
-        description: växla aktivera för att ta bort den röda kanten
-        footer: om aktiverat kommer vi att skydda dina kommentarer från spam
-      advanced_enable_advanced:
-        title: aktivera avancerade inställningar
-        description: du kan aktivera avancerade inställningar för att ändra inställningarna
-      advanced_dir_listing:
-        title: katalogförteckning
-        description: >-
-          om det inte finns någon indexfil i en katalog, kommer
-          kataloginnehållet att visas.
-  dashboard:
-    nav: instrumentbräda
-    title: instrumentbräda
-    index:
-      nav: hem
-      title: hem
+  events:
+    nav: evenemang
+    title: evenemang
+    description: alla tidigare händelser som kusinerna har haft
+  restaurants:
+    nav: restauranger
+    title: restaurangerna
+    description: alla restauranger som kusinerna har njutit av
 banners:
-  welcome: hej, välkommen till %{app_name}!
+  welcome: nästa cousenhood kommer att vara i pamplona 2023!
 others:
   learn_more: lär dig mer
   copy: kopiera

@@ -10,8 +10,6 @@ import { capitalize } from '~/utils/str'
 import { formatDate, percentage } from '~/utils/sgc'
 
 import { Size } from '~/composables/useScreen'
-import Overlay from '~~/components/ActionSheet/Overlay.vue'
-import { ActionSheet, ActionSheetOverlay } from '~~/.nuxt/components'
 
 // composable
 const { t } = useLang()
@@ -22,53 +20,19 @@ definePageMeta({
   layout: 'page',
 })
 useHead(() => ({
-  title: capitalize(t('pages.setting.title')),
+  title: capitalize(t('pages.events.title')),
   meta: [
     {
       name: 'description',
-      content: t('pages.setting.description'),
+      content: t('pages.events.description'),
     },
   ],
 }))
 
-// funcs
-const randomToken = () => {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-  let token = ''
-  for (let i = 0; i < 255; i++) {
-    token += chars.charAt(Math.floor(Math.random() * chars.length))
-  }
-  return token
-}
-
 // state
-const username = ref('viandwi24')
-const id = ref(randomToken())
-const enableSpamProtection = ref(false)
-const enableDirList = ref(false)
-const enableAdvancedSetting = ref(false)
 const showPoints = ref(false)
 
 // methods
-const validate = async () => {
-  // fetch username from github api
-  try {
-    const response = await fetch(
-      `https://api.github.com/users/${username.value}`
-    )
-    if (response.status !== 200)
-      throw new Error(
-        `error when fetching username : ${response.statusText} (${response.status})`
-      )
-    const data = (await response.json()) as {
-      name: string
-      id: string
-    }
-    alert(`Found Accout Name ${data.name} with id : ${data.id}`)
-  } catch (err) {
-    alert(err)
-  }
-}
 const { data: ediciones } = await useFetch<[Edition]>(
   'https://lasgc.com/primoapi/ediciones'
 )
@@ -153,58 +117,85 @@ const { data: ediciones } = await useFetch<[Edition]>(
                     <Button
                       size="md"
                       text="Ver todos"
-                      class="font-extrabold"
+                      class="font-extrabold mt-2"
                       @click="showPoints = true"
                     />
-                    <FullOverlay v-if="showPoints" @click="showPoints = false">
-                      <h3 class="text-xl text-light-900 text-center font-bold">
-                        Restaurante {{ edicion.restaurante }}
-                      </h3>
-                      <div class="flex flex-row flex-wrap">
-                        <CircleWrapper
-                          :points="percentage(edicion.puntos_calidad)"
-                          text="Calidad de la comida"
-                        />
-                        <CircleWrapper
-                          :points="percentage(edicion.puntos_precio)"
-                          text="Calidaad / Precio"
-                        />
-                        <CircleWrapper
-                          :points="percentage(edicion.puntos_local)"
-                          text="Ambiente del local"
-                        />
-                        <CircleWrapper
-                          :points="percentage(edicion.puntos_servicio)"
-                          text="Amabilidad del personal"
-                        />
-                        <CircleWrapper
-                          :points="percentage(edicion.puntos_vino)"
-                          text="Los vinos"
-                        />
-                        <CircleWrapper
-                          :points="percentage(edicion.puntuacion_restaurante)"
-                          text="Total"
-                        />
-                      </div>
-                      <h3 class="text-xl text-light-900 text-center font-bold">
-                        La noche, actividad cultural y organización
-                      </h3>
-                      <div class="flex flex-row flex-wrap">
-                        <CircleWrapper
-                          :points="percentage(edicion.puntos_ambiente_nocturno)"
-                          :text="`La noche de ${edicion.nombre}`"
-                        />
-                        <CircleWrapper
-                          v-if="edicion.actividad"
-                          :points="percentage(edicion.puntos_actividad)"
-                          :text="edicion.actividad"
-                        />
-                        <CircleWrapper
-                          :points="percentage(edicion.puntos_organizacion)"
-                          :text="`Organización de ${edicion.organizador}`"
-                        />
-                      </div>
-                    </FullOverlay>
+                    <transition
+                      enter-active-class="transition ease-out duration-300"
+                      enter-class="transform opacity-0 scale-95"
+                      enter-to-class="transform opacity-100 scale-100"
+                      leave-active-class="transition ease-in duration-200"
+                      leave-class="transform opacity-100 scale-100"
+                      leave-to-class="transform opacity-0 scale-95"
+                    >
+                      <FullOverlay
+                        v-if="showPoints"
+                        @click="showPoints = false"
+                      >
+                        <h3
+                          class="text-xl text-light-900 text-center font-bold pt-6 pb-2"
+                        >
+                          Restaurante {{ edicion.restaurante }}
+                        </h3>
+                        <div class="flex flex-row flex-wrap">
+                          <CircleWrapper
+                            :points="percentage(edicion.puntos_calidad)"
+                            max-lines="3"
+                            text="Calidad de la comida"
+                          />
+                          <CircleWrapper
+                            :points="percentage(edicion.puntos_precio)"
+                            max-lines="3"
+                            text="Calidaad / Precio"
+                          />
+                          <CircleWrapper
+                            :points="percentage(edicion.puntos_local)"
+                            max-lines="3"
+                            text="Ambiente del local"
+                          />
+                          <CircleWrapper
+                            :points="percentage(edicion.puntos_servicio)"
+                            max-lines="3"
+                            text="Amabilidad del personal"
+                          />
+                          <CircleWrapper
+                            :points="percentage(edicion.puntos_vino)"
+                            max-lines="3"
+                            text="Los vinos"
+                          />
+                          <CircleWrapper
+                            :points="percentage(edicion.puntuacion_restaurante)"
+                            max-lines="3"
+                            text="Total"
+                          />
+                        </div>
+                        <h3
+                          class="text-xl text-light-900 text-center font-bold pt-6 pb-2"
+                        >
+                          La noche, actividad cultural y organización
+                        </h3>
+                        <div class="flex flex-row flex-wrap">
+                          <CircleWrapper
+                            :points="
+                              percentage(edicion.puntos_ambiente_nocturno)
+                            "
+                            max-lines="3"
+                            :text="`La noche de ${edicion.nombre}`"
+                          />
+                          <CircleWrapper
+                            v-if="edicion.actividad"
+                            :points="percentage(edicion.puntos_actividad)"
+                            max-lines="3"
+                            :text="edicion.actividad"
+                          />
+                          <CircleWrapper
+                            :points="percentage(edicion.puntos_organizacion)"
+                            max-lines="3"
+                            :text="`Organización de ${edicion.organizador}`"
+                          />
+                        </div>
+                      </FullOverlay>
+                    </transition>
                   </div>
                 </CardContent>
               </Card>
@@ -215,9 +206,4 @@ const { data: ediciones } = await useFetch<[Edition]>(
     </PageBody>
   </PageWrapper>
 </template>
-<style>
-.main-points {
-}
-.main-points > * {
-}
-</style>
+<style></style>

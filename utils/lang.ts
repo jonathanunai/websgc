@@ -37,9 +37,9 @@ export function LanguageManager() {
       const foundLang = window
         ? window.navigator.language.substring(0, 2)
         : 'en'
-      return availableLocales[foundLang] ? foundLang : 'en'
+      return availableLocales[foundLang] ? foundLang : 'es'
     } catch (error) {
-      return 'en'
+      return 'es'
     }
   }
   const getUserLocale = (): string =>
