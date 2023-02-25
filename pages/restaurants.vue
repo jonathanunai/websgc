@@ -61,6 +61,7 @@ const sortedEditions = ediciones.value?.sort((a: Edition, b: Edition) =>
             </button>
             <template #popper>
               <div class="p-4">
+                <p class="text-xl pb-2">{{ edition.restaurante }}</p>
                 <p>Calidad comida: {{ edition.puntos_calidad }}</p>
                 <p>Calidad precio: {{ edition.puntos_precio }}</p>
                 <p>Vinos: {{ edition.puntos_vino }}</p>
