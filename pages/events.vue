@@ -36,6 +36,7 @@ const showPoints = ref(false)
 const { data: ediciones } = await useFetch<[Edition]>(
   'https://lasgc.com/primoapi/ediciones'
 )
+const onlyEdiciones = ediciones.value?.filter((e) => e.tipo === 'Evento')
 </script>
 
 <template>
@@ -57,7 +58,7 @@ const { data: ediciones } = await useFetch<[Edition]>(
             class="w-full md:w-1/6 flex md:flex-col rounded-lg mb-2 overscroll-x-none overflow-x-scroll md:h-screen md:overflow-x-scroll"
           >
             <HeadlessUiTab
-              v-for="edicion in ediciones"
+              v-for="edicion in onlyEdiciones"
               :key="edicion.edicion"
               v-slot="{ selected }"
               as="template"
@@ -79,7 +80,7 @@ const { data: ediciones } = await useFetch<[Edition]>(
             </HeadlessUiTab>
           </TabList>
           <TabPanels class="flex-1">
-            <TabPanel v-for="edicion in ediciones" :key="edicion.nombre">
+            <TabPanel v-for="edicion in onlyEdiciones" :key="edicion.nombre">
               <Card class="mb-4" :img="edicion.imagen" :title="edicion.nombre">
                 <CardContent>
                   <p
