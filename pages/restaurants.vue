@@ -116,8 +116,7 @@ const fotos = ediciones.value
                     :key="foto.foto"
                     :src="`http://lasgc.com/${foto.foto}`"
                     alt=""
-                    width="330"
-                    class="w-full shadow-lg shadow-dark-800"
+                    class="w-full shadow-lg shadow-dark-800 max-w-72 md:max-w-auto"
                   />
                 </div>
               </div>
