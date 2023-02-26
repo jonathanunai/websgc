@@ -2,6 +2,8 @@ export {}
 
 declare global {
   interface Edition {
+    nid: string
+    tipo: string
     nombre: string
     actividad: string
     asistentes: string
@@ -25,5 +27,15 @@ declare global {
     vinos: string
     web_actividad: string
     web_restaurante: string
+    foto: string
+    foto_edicion: string
+    foto_publico: string
+    foto_restaurante: string
+  }
+  interface Foto {
+    foto: string
+    foto_edicion: string
+    foto_publico: string
+    foto_restaurante: string
   }
 }

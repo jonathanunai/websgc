@@ -22,10 +22,19 @@ useHead(() => ({
 const { data: ediciones } = await useFetch<Array<Edition>>(
   'https://lasgc.com/primoapi/ediciones'
 )
-const sortedEditions = ediciones.value?.sort((a: Edition, b: Edition) =>
-  a.puntuacion_restaurante > b.puntuacion_restaurante ? -1 : 1
-)
-// console.log('ediciones :>> ', sortedEditions);
+const sortedEditions = ediciones.value
+  ?.filter((e) => e.tipo === 'Evento')
+  .sort((a: Edition, b: Edition) =>
+    a.puntuacion_restaurante > b.puntuacion_restaurante ? -1 : 1
+  )
+const fotos = ediciones.value
+  ?.filter(
+    (e) =>
+      e.tipo === 'Foto' && e.foto_publico === '1' && e.foto_restaurante === '1'
+  )
+  .map(({ foto, foto_edicion, foto_publico }) => {
+    return { foto, fotoEdicion: foto_edicion, fotoPublico: foto_publico }
+  })
 </script>
 <template>
   <div class="p-4 mx-auto">
@@ -56,17 +65,61 @@ const sortedEditions = ediciones.value?.sort((a: Edition, b: Edition) =>
         <td data-th="Lugar" class="">{{ edition.nombre }}</td>
         <td data-th="Puntuación">
           <VDropdown :distance="6" class="inline-block">
+            {{ edition.puntuacion_restaurante }}
+
             <button class="text-teal-200">
-              {{ edition.puntuacion_restaurante }}
+              <IconFaSolid:eye
+                class="text-xl inline-block ml-2 p-1 mb-1 text-teal-200"
+              />
             </button>
             <template #popper>
-              <div class="p-4">
+              <div class="p-4 max-w-lg">
                 <p class="text-xl pb-2">{{ edition.restaurante }}</p>
-                <p>Calidad comida: {{ edition.puntos_calidad }}</p>
-                <p>Calidad precio: {{ edition.puntos_precio }}</p>
-                <p>Vinos: {{ edition.puntos_vino }}</p>
-                <p>Ambiente: {{ edition.puntos_local }}</p>
-                <p>Amabilidad: {{ edition.puntos_servicio }}</p>
+                <p>
+                  Calidad comida:
+                  <span class="float-right pl-3">{{
+                    edition.puntos_calidad
+                  }}</span>
+                </p>
+                <p>
+                  Calidad precio:
+                  <span class="float-right pl-3">{{
+                    edition.puntos_precio
+                  }}</span>
+                </p>
+                <p>
+                  Vinos:
+                  <span class="float-right pl-3">{{
+                    edition.puntos_vino
+                  }}</span>
+                </p>
+                <p>
+                  Ambiente:
+                  <span class="float-right pl-3">{{
+                    edition.puntos_local
+                  }}</span>
+                </p>
+                <p>
+                  Amabilidad:
+                  <span class="float-right pl-3">{{
+                    edition.puntos_servicio
+                  }}</span>
+                </p>
+                <div
+                  v-if="fotos"
+                  class="overflow-hidden overflow-x-auto w-full flex max-w-full overscroll-none"
+                >
+                  <img
+                    v-for="foto in fotos.filter(
+                      (f) => f.foto_edicion === edition.nid
+                    )"
+                    :key="foto.foto"
+                    :src="`http://lasgc.com/${foto.foto}`"
+                    alt=""
+                    width="330"
+                    class="w-full shadow-lg shadow-dark-800"
+                  />
+                </div>
               </div>
             </template>
           </VDropdown>
