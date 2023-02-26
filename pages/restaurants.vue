@@ -33,7 +33,7 @@ const fotos = ediciones.value
       e.tipo === 'Foto' && e.foto_publico === '1' && e.foto_restaurante === '1'
   )
   .map(({ foto, foto_edicion, foto_publico }) => {
-    return { foto, fotoEdicion: foto_edicion, fotoPublico: foto_publico }
+    return { foto, foto_edicion, foto_publico }
   })
 </script>
 <template>
